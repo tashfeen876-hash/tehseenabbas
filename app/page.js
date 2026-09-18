@@ -33,7 +33,7 @@ const DEFAULT_SETTINGS = {
     "Tahseen Abbas, Founder of Binary Hub, is committed to creating sustainable opportunities for students, youth, women, and workers through technology, digital skills, and entrepreneurship. His work focuses on youth empowerment, women empowerment, workforce development, employment generation, and digital inclusion, helping individuals gain industry-relevant skills, access freelancing opportunities, and build sustainable careers in the digital economy.",
   contactText:
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-  address: "25, Dist town Street, Logn\nCalifornia, US",
+  address: "W8C5+26V Binary Hub, near FCNA Headquarter\nGilgit",
   phone: "+92 310 6666352",
   email: "write.tahseenabbas@gmail.com",
   profileImage: "/logo/tehseen-abbas.jpg",
