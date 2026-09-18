@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { put } from "@vercel/blob";
-import fs from "fs";
 import path from "path";
+import { connectDb } from "../../../lib/db.mjs";
+import { UploadImage } from "../../../lib/models.mjs";
 
 export const dynamic = "force-dynamic";
 
@@ -27,18 +28,14 @@ export async function POST(req) {
       return NextResponse.json({ url: blob.url });
     }
 
-    if (process.env.NODE_ENV === "production") {
-      return NextResponse.json(
-        { error: "Image storage is not configured. Connect a Vercel Blob store (BLOB_READ_WRITE_TOKEN) and redeploy." },
-        { status: 503 }
-      );
-    }
-
-    const uploadsDir = path.join(process.cwd(), "public", "uploads");
-    if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
-    const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(path.join(uploadsDir, name), buffer);
-    return NextResponse.json({ url: `/uploads/${name}` });
+    const data = Buffer.from(await file.arrayBuffer());
+    await connectDb();
+    const doc = await UploadImage.create({
+      filename: name,
+      contentType: file.type || "image/jpeg",
+      data,
+    });
+    return NextResponse.json({ url: `/api/uploads/${doc._id}` });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
