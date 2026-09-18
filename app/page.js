@@ -34,8 +34,8 @@ const DEFAULT_SETTINGS = {
   contactText:
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
   address: "25, Dist town Street, Logn\nCalifornia, US",
-  phone: "800 123 3456\n900 123 3457",
-  email: "Fax: 800 123 3456\nEmail: info@themsbit.com",
+  phone: "+92 310 6666352",
+  email: "write.tahseenabbas@gmail.com",
   profileImage: "/logo/tehseen-abbas.jpg",
   logoImage: "/logo/logo.png",
   brandText: "BINARY-HUB",
@@ -90,11 +90,23 @@ export default function Home() {
   const [autoScroll, setAutoScroll] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
+  const [contactForm, setContactForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [reviewForm, setReviewForm] = useState({ name: "", role: "", text: "", avatar: "" });
   const [reviewMsg, setReviewMsg] = useState("");
   const [reviewErr, setReviewErr] = useState("");
   const [reviewBusy, setReviewBusy] = useState(false);
   const [reviewUploading, setReviewUploading] = useState(false);
+
+  const handleContactChange = (e) => {
+    setContactForm({ ...contactForm, [e.target.name]: e.target.value });
+  };
+
+  const submitContact = (e) => {
+    e.preventDefault();
+    const text = `Name: ${contactForm.name}\nEmail: ${contactForm.email}\nSubject: ${contactForm.subject}\nMessage: ${contactForm.message}`;
+    const url = `https://wa.me/923106666352?text=${encodeURIComponent(text)}`;
+    window.open(url, "_blank");
+  };
 
   useEffect(() => {
     fetch("/api/portfolio")
@@ -557,11 +569,11 @@ export default function Home() {
             <div className="contact-left reveal">
               <h2><span className="sc-accent">Contact</span> <span className="sc-collab">Us</span></h2>
               <p>{settings.contactText}</p>
-              <form>
-                <div className="form-group"><input type="text" placeholder="Full Name" required /></div>
-                <div className="form-group"><input type="email" placeholder="Email Id" required /></div>
-                <div className="form-group"><input type="text" placeholder="Subject" required /></div>
-                <div className="form-group"><textarea placeholder="Your Message" required></textarea></div>
+              <form onSubmit={submitContact}>
+                <div className="form-group"><input type="text" name="name" value={contactForm.name} onChange={handleContactChange} placeholder="Full Name" required /></div>
+                <div className="form-group"><input type="email" name="email" value={contactForm.email} onChange={handleContactChange} placeholder="Email Id" required /></div>
+                <div className="form-group"><input type="text" name="subject" value={contactForm.subject} onChange={handleContactChange} placeholder="Subject" required /></div>
+                <div className="form-group"><textarea name="message" value={contactForm.message} onChange={handleContactChange} placeholder="Your Message" required></textarea></div>
                 <button type="submit" className="btn-send">Send</button>
               </form>
             </div>

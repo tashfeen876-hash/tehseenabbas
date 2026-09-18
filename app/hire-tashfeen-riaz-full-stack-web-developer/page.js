@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const ROUTE = "/hire-tashfeen-riaz-full-stack-web-developer";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tahseenabbas.com";
 const PAGE_URL = `${SITE_URL}${ROUTE}`;
 
 export const metadata = {
@@ -18,7 +18,7 @@ export const metadata = {
       "Full-stack web developer in Gilgit-Baltistan, Pakistan. React, Vue.js, Next.js, JavaScript, TypeScript and Shopify. Available for remote and freelance projects.",
     url: PAGE_URL,
     type: "profile",
-    images: [`${SITE_URL}/images/tashfeen-bin-riaz.png`],
+    images: [`${SITE_URL}/logo/tehseen-abbas.jpg`],
     profile: { firstName: "Tashfeen", lastName: "Riaz" },
   },
   twitter: {
@@ -26,7 +26,7 @@ export const metadata = {
     title: "Tashfeen Bin Riaz — Full-Stack Web Developer in Gilgit-Baltistan, Pakistan",
     description:
       "Full-stack web developer in Gilgit-Baltistan, Pakistan. React, Vue.js, Next.js, JavaScript, TypeScript and Shopify.",
-    images: [`${SITE_URL}/images/tashfeen-bin-riaz.png`],
+    images: [`${SITE_URL}/logo/tehseen-abbas.jpg`],
   },
 };
 
@@ -166,7 +166,7 @@ const jsonLd = {
       jobTitle: "Full-Stack Web Developer",
       description:
         "Professional full-stack web developer based in Gilgit-Baltistan, Pakistan, specialising in React, Vue.js, Next.js, JavaScript, TypeScript and Shopify.",
-      image: `${SITE_URL}/images/tashfeen-bin-riaz.png`,
+      image: `${SITE_URL}/logo/tehseen-abbas.jpg`,
       worksFor: { "@id": `${SITE_URL}/#organization` },
       address: {
         "@type": "PostalAddress",

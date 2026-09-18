@@ -1333,18 +1333,18 @@
               point of using Lorem Ipsum is that it has a more-or-less normal
               distribution of letters, as opposed to using Content here.
             </p>
-            <form>
+            <form onsubmit="event.preventDefault(); sendContactToWhatsApp(event);">
               <div class="form-group">
-                <input type="text" placeholder="Full Name" required />
+                <input type="text" name="name" placeholder="Full Name" required />
               </div>
               <div class="form-group">
-                <input type="email" placeholder="Email Id" required />
+                <input type="email" name="email" placeholder="Email Id" required />
               </div>
               <div class="form-group">
-                <input type="text" placeholder="Subject" required />
+                <input type="text" name="subject" placeholder="Subject" required />
               </div>
               <div class="form-group">
-                <textarea placeholder="Your Message" required></textarea>
+                <textarea name="message" placeholder="Your Message" required></textarea>
               </div>
               <button type="submit" class="btn-send">Send</button>
             </form>
@@ -1361,14 +1361,14 @@
               <i class="fas fa-phone"></i>
               <div>
                 <h4>Phone</h4>
-                <p>800 123 3456<br />900 123 3457</p>
+                <p>+92 310 6666352</p>
               </div>
             </div>
             <div class="contact-info-item">
               <i class="fas fa-envelope"></i>
               <div>
                 <h4>Email</h4>
-                <p>Fax: 800 123 3456<br />Email: info@themsbit.com</p>
+                <p>write.tahseenabbas@gmail.com</p>
               </div>
             </div>
             <div class="contact-social">
@@ -1390,6 +1390,19 @@
     </main>
 
     <script>
+      function sendContactToWhatsApp(event) {
+        var form = event.target;
+        var name = form.querySelector('[name="name"]').value;
+        var email = form.querySelector('[name="email"]').value;
+        var subject = form.querySelector('[name="subject"]').value;
+        var message = form.querySelector('[name="message"]').value;
+        var text =
+          "Name: " + name + "\nEmail: " + email +
+          "\nSubject: " + subject + "\nMessage: " + message;
+        var url = "https://wa.me/923106666352?text=" + encodeURIComponent(text);
+        window.open(url, "_blank");
+      }
+
       function toggleSidebar() {
         document.getElementById("sidebar").classList.toggle("open");
       }
