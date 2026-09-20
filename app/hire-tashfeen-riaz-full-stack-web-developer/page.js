@@ -190,6 +190,7 @@ const jsonLd = {
       name: metadata.title,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#tashfeen-riaz` },
+      mainEntity: { "@id": `${SITE_URL}/#tashfeen-riaz` },
       inLanguage: "en",
     },
     {
