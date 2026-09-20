@@ -518,9 +518,9 @@ export default function HomeClient({ initialData }) {
               {settings.heroDesc.split("Tahseen Abbas")[1].split("Binary Hub")[1]}
             </p>
             <div className="social-icons">
-              <a href={social.instagram}><i className="fab fa-instagram"></i></a>
-              <a href={social.linkedin}><i className="fab fa-linkedin-in"></i></a>
-              <a href={social.github}><i className="fab fa-github"></i></a>
+              <a href={social.instagram} target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+              <a href={social.linkedin} target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
+              <a href={social.github} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
             </div>
           </div>
         </section>
@@ -716,7 +716,7 @@ export default function HomeClient({ initialData }) {
             <br />
             Full-Stack Web Developer
             <br />
-            <a href="/hire-tashfeen-riaz-full-stack-web-developer" className="btn-detail">
+<a href="/hire-tashfeen-riaz-full-stack-web-developer" className="btn-detail" target="_blank" rel="noopener noreferrer">
               <i className="fas fa-user"></i> View Detail
             </a>
           </div>
