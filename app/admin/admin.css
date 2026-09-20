@@ -67,6 +67,19 @@ body {
   padding: 22px 20px; font-size: 18px; font-weight: 700; color: #fff;
   border-bottom: 1px solid #1e293b; letter-spacing: 0.5px;
 }
+.admin-back-site {
+  display: flex; align-items: center; gap: 8px; width: fit-content;
+  margin: 0 auto; padding: 10px 14px; border: 1px solid #2c9cf5; border-radius: 8px;
+  color: #2c9cf5; font-size: 13px; font-weight: 600; text-decoration: none;
+  transition: all 0.15s;
+}
+.admin-back-site:hover { background: #2c9cf5; color: #fff; }
+.admin-back-site i { font-size: 12px; }
+.admin-sidebar-bottom {
+  margin-top: auto;
+  padding: 14px 12px;
+  border-top: 1px solid #1e293b;
+}
 .admin-sidebar nav { display: flex; flex-direction: column; padding: 12px; gap: 4px; }
 .admin-sidebar nav button {
   text-align: left; padding: 12px 14px; background: transparent; border: none; color: #cbd5e1;

@@ -121,19 +121,29 @@ function Dashboard({ username, tab, setTab, onLogout, onUsernameUpdate }) {
   return (
     <div className="admin-shell">
       <aside className="admin-sidebar">
-        <div className="admin-brand">Portfolio Admin</div>
-        <nav>
-          {TABS.map((t) => (
-            <button
-              key={t}
-              className={tab === t ? "active" : ""}
-              onClick={() => setTab(t)}
+          <div className="admin-brand">Portfolio Admin</div>
+          <nav>
+            {TABS.map((t) => (
+              <button
+                key={t}
+                className={tab === t ? "active" : ""}
+                onClick={() => setTab(t)}
+              >
+                {t}
+              </button>
+            ))}
+          </nav>
+          <div className="admin-sidebar-bottom">
+            <a
+              className="admin-back-site"
+              href="https://tahseenabbas.com/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {t}
-            </button>
-          ))}
-        </nav>
-      </aside>
+              <i className="fas fa-globe"></i> Back to Site
+            </a>
+          </div>
+        </aside>
       <main className="admin-main">
         <header className="admin-topbar">
           <span>Welcome, {username}</span>
