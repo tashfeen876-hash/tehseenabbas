@@ -160,7 +160,6 @@ const jsonLd = {
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#tahseen-abbas` },
       mainEntity: { "@id": `${SITE_URL}/#tahseen-abbas` },
-      author: { "@id": `${SITE_URL}/#tashfeen-riaz` },
       inLanguage: "en",
     },
     {
