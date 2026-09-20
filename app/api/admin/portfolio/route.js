@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "../../../../lib/auth";
 import { initDb } from "../../../../lib/db.mjs";
 import { PortfolioItem } from "../../../../lib/models.mjs";
+import { revalidateSite } from "../../../../lib/revalidate";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +40,7 @@ export async function POST(req) {
     description,
     sortOrder: maxOrder + 1,
   });
+  revalidateSite();
   return NextResponse.json({ id: String(doc._id) });
 }
 
@@ -55,6 +57,7 @@ export async function PUT(req) {
   if (description !== undefined) set.description = description;
   if (sortOrder !== undefined) set.sortOrder = sortOrder;
   await PortfolioItem.updateOne({ _id: id }, { $set: set });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }
 
@@ -66,5 +69,6 @@ export async function DELETE(req) {
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
   await initDb();
   await PortfolioItem.deleteOne({ _id: id });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }

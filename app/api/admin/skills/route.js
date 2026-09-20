@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "../../../../lib/auth";
 import { initDb } from "../../../../lib/db.mjs";
 import { Skill } from "../../../../lib/models.mjs";
+import { revalidateSite } from "../../../../lib/revalidate";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,7 @@ export async function POST(req) {
     name: body.name || "",
     target: Number(body.target) || 0,
   });
+  revalidateSite();
   return NextResponse.json({ id: String(doc._id) });
 }
 
@@ -43,7 +45,8 @@ export async function PUT(req) {
         target: Number(body.target) || 0,
       },
     }
-  );
+);
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }
 
@@ -53,5 +56,6 @@ export async function DELETE(req) {
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
   await initDb();
   await Skill.deleteOne({ _id: id });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }

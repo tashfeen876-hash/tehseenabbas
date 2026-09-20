@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "../../../../lib/auth";
 import { initDb } from "../../../../lib/db.mjs";
 import { Partner } from "../../../../lib/models.mjs";
+import { revalidateSite } from "../../../../lib/revalidate";
 
 export const dynamic = "force-dynamic";
 
@@ -32,6 +33,7 @@ export async function POST(req) {
   const maxDoc = await Partner.findOne().sort({ sortOrder: -1 }).select("sortOrder");
   const maxOrder = maxDoc?.sortOrder ?? -1;
   const doc = await Partner.create({ src, name, sortOrder: maxOrder + 1 });
+  revalidateSite();
   return NextResponse.json({ id: String(doc._id) });
 }
 
@@ -47,6 +49,7 @@ export async function PUT(req) {
   if (name !== undefined) set.name = name;
   if (sortOrder !== undefined) set.sortOrder = sortOrder;
   await Partner.updateOne({ _id: id }, { $set: set });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }
 
@@ -58,5 +61,6 @@ export async function DELETE(req) {
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
   await initDb();
   await Partner.deleteOne({ _id: id });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { isAuthenticated } from "../../../../lib/auth";
 import { initDb } from "../../../../lib/db.mjs";
 import { Experience } from "../../../../lib/models.mjs";
+import { revalidateSite } from "../../../../lib/revalidate";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,7 @@ export async function POST(req) {
     color: body.color || "cyan",
     image: body.image || "",
   });
+  revalidateSite();
   return NextResponse.json({ id: String(doc._id) });
 }
 
@@ -49,7 +51,8 @@ export async function PUT(req) {
         image: body.image,
       },
     }
-  );
+);
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }
 
@@ -59,5 +62,6 @@ export async function DELETE(req) {
   if (!id) return NextResponse.json({ error: "id required" }, { status: 400 });
   await initDb();
   await Experience.deleteOne({ _id: id });
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }

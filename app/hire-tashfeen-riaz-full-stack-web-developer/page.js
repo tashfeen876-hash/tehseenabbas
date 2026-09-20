@@ -159,7 +159,7 @@ const jsonLd = {
     },
     {
       "@type": "Person",
-      "@id": `${SITE_URL}/#person`,
+      "@id": `${SITE_URL}/#tashfeen-riaz`,
       name: "Tashfeen Bin Riaz",
       alternateName: "Tashfeen Riaz",
       url: PAGE_URL,
@@ -189,7 +189,7 @@ const jsonLd = {
       url: PAGE_URL,
       name: metadata.title,
       isPartOf: { "@id": `${SITE_URL}/#website` },
-      about: { "@id": `${SITE_URL}/#person` },
+      about: { "@id": `${SITE_URL}/#tashfeen-riaz` },
       inLanguage: "en",
     },
     {

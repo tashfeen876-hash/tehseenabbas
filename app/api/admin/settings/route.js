@@ -6,6 +6,7 @@ import {
   verifyAdmin,
 } from "../../../../lib/auth";
 import { getSiteSettings, setSetting } from "../../../../lib/data";
+import { revalidateSite } from "../../../../lib/revalidate";
 
 export const dynamic = "force-dynamic";
 
@@ -40,5 +41,6 @@ export async function PUT(req) {
     }
     await setAdminPassword(changePassword.newPassword);
   }
+  revalidateSite();
   return NextResponse.json({ ok: true });
 }
