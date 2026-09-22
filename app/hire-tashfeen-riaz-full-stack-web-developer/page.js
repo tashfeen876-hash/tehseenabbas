@@ -3,6 +3,14 @@ import Link from "next/link";
 const ROUTE = "/hire-tashfeen-riaz-full-stack-web-developer";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://tahseenabbas.com";
 const PAGE_URL = `${SITE_URL}${ROUTE}`;
+const OG_IMAGE_URL = `${SITE_URL}/tashfeen-riaz-portrait.webp`;
+const OG_IMAGE = {
+  url: OG_IMAGE_URL,
+  width: 1607,
+  height: 1791,
+  alt: "Tashfeen Bin Riaz — Full-Stack Web Developer in Gilgit-Baltistan, Pakistan",
+  type: "image/webp",
+};
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -17,8 +25,10 @@ export const metadata = {
     description:
       "Full-stack web developer in Gilgit-Baltistan, Pakistan. React, Vue.js, Next.js, JavaScript, TypeScript and Shopify. Available for remote and freelance projects.",
     url: PAGE_URL,
+    siteName: "Binary Hub",
+    locale: "en_US",
     type: "profile",
-    images: [`${SITE_URL}/logo/tehseen-abbas.jpg`],
+    images: [OG_IMAGE],
     profile: { firstName: "Tashfeen", lastName: "Riaz" },
   },
   twitter: {
@@ -26,7 +36,7 @@ export const metadata = {
     title: "Tashfeen Bin Riaz — Full-Stack Web Developer in Gilgit-Baltistan, Pakistan",
     description:
       "Full-stack web developer in Gilgit-Baltistan, Pakistan. React, Vue.js, Next.js, JavaScript, TypeScript and Shopify.",
-    images: [`${SITE_URL}/logo/tehseen-abbas.jpg`],
+    images: [OG_IMAGE],
   },
 };
 
@@ -166,7 +176,19 @@ const jsonLd = {
       jobTitle: "Full-Stack Web Developer",
       description:
         "Professional full-stack web developer based in Gilgit-Baltistan, Pakistan, specialising in React, Vue.js, Next.js, JavaScript, TypeScript and Shopify.",
-      image: `${SITE_URL}/logo/tehseen-abbas.jpg`,
+      image: OG_IMAGE_URL,
+      telephone: "+923170885816",
+      knowsAbout: [
+        "Full-Stack Web Development",
+        "React",
+        "Next.js",
+        "Vue.js",
+        "JavaScript",
+        "TypeScript",
+        "Node.js",
+        "Shopify",
+        "SEO",
+      ],
       worksFor: { "@id": `${SITE_URL}/#organization` },
       address: {
         "@type": "PostalAddress",
@@ -192,6 +214,7 @@ const jsonLd = {
       about: { "@id": `${SITE_URL}/#tashfeen-riaz` },
       mainEntity: { "@id": `${SITE_URL}/#tashfeen-riaz` },
       inLanguage: "en",
+      primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE_URL, width: 1607, height: 1791 },
     },
     {
       "@type": "BreadcrumbList",
@@ -199,6 +222,16 @@ const jsonLd = {
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
         { "@type": "ListItem", position: 2, name: "Tashfeen Bin Riaz", item: PAGE_URL },
       ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${PAGE_URL}#faq`,
+      url: `${PAGE_URL}#faq`,
+      mainEntity: FAQS.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
     },
   ],
 };
