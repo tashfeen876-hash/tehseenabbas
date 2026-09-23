@@ -138,7 +138,7 @@ const jsonLd = {
       worksFor: { "@id": `${SITE_URL}/#organization` },
       description:
         "Tashfeen Bin Riaz is a full-stack web developer who designed and developed the tahseenabbas.com website for Tahseen Abbas and Binary Hub.",
-      image: `${SITE_URL}/logo/tehseen-abbas.jpg`,
+      image: `${SITE_URL}/tashfeen-riaz-portrait.webp`,
       sameAs: [
         "https://www.linkedin.com/in/tashfeen-riaz-39b1a2396/",
         "https://github.com/tashfeen635-cmyk",
