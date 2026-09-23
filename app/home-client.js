@@ -183,6 +183,7 @@ export default function HomeClient({ initialData }) {
   const [activeFilter, setActiveFilter] = useState("all");
   const [data, setData] = useState(initialData || null);
   const [selectedIdx, setSelectedIdx] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [autoScroll, setAutoScroll] = useState(false);
   const [showReview, setShowReview] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -393,7 +394,13 @@ export default function HomeClient({ initialData }) {
     };
     raf = requestAnimationFrame(step);
 
-    const interrupt = () => {
+    const isInteractive = (el) =>
+      el && typeof el.closest === "function"
+        ? !!el.closest("button, a, input, textarea, select, label, [role='button']")
+        : false;
+
+    const interrupt = (e) => {
+      if (isInteractive(e?.target)) return;
       if (interruptedUntil > performance.now()) return;
       interruptedUntil = performance.now() + RESUME_MS;
       console.log("[autoscroll] user input -> paused, auto-resuming in 5s");
@@ -428,9 +435,17 @@ export default function HomeClient({ initialData }) {
     };
   }, [autoScroll]);
 
-  const toggleSidebar = () => {
-    document.getElementById("sidebar").classList.toggle("open");
+  const toggleSidebar = (forceClose) => {
+    if (forceClose === true) {
+      setMenuOpen(false);
+    } else {
+      setMenuOpen((prev) => !prev);
+    }
   };
+
+  useEffect(() => {
+    document.getElementById("sidebar")?.classList.toggle("open", menuOpen);
+  }, [menuOpen]);
 
   const visibleItems = items.filter(
     (item) => activeFilter === "all" || item.category === activeFilter
@@ -463,8 +478,8 @@ export default function HomeClient({ initialData }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <button className="mobile-toggle" onClick={toggleSidebar}>
-        <i className="fas fa-bars"></i>
+      <button className="mobile-toggle" onClick={toggleSidebar} aria-label="Toggle menu">
+        <i className={`fas ${menuOpen ? "fa-xmark" : "fa-bars"}`}></i>
       </button>
 
       <aside className="sidebar" id="sidebar">
@@ -472,14 +487,14 @@ export default function HomeClient({ initialData }) {
           <img src={settings.profileImage} alt="Tahseen Abbas" />
         </div>
         <ul className="nav-menu">
-          <li><a href="#about" className="active">About</a></li>
-          <li><a href="#portfolio">Visual Journey</a></li>
-          <li><a href="#experience">Mission & Vision</a></li>
-          <li><a href="#skills">Partners & Collaborations</a></li>
-          <li><a href="#awards">Future Vision</a></li>
-          <li><a href="#community">Community Initiatives</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" className="active" onClick={() => toggleSidebar(true)}>About</a></li>
+          <li><a href="#portfolio" onClick={() => toggleSidebar(true)}>Visual Journey</a></li>
+          <li><a href="#experience" onClick={() => toggleSidebar(true)}>Mission & Vision</a></li>
+          <li><a href="#skills" onClick={() => toggleSidebar(true)}>Partners & Collaborations</a></li>
+          <li><a href="#awards" onClick={() => toggleSidebar(true)}>Future Vision</a></li>
+          <li><a href="#community" onClick={() => toggleSidebar(true)}>Community Initiatives</a></li>
+          <li><a href="#testimonials" onClick={() => toggleSidebar(true)}>Testimonials</a></li>
+          <li><a href="#contact" onClick={() => toggleSidebar(true)}>Contact</a></li>
         </ul>
         <div className="sidebar-auto-scroll">
           <button
