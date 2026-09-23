@@ -518,7 +518,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: stretch;
     width: max-content;
-    animation: testimonial-scroll 26s linear infinite;
+    animation: testimonial-scroll 50s linear infinite;
 }
 .testimonial-marquee-card {
     background: var(--white);
